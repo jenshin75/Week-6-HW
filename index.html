@@ -19,19 +19,19 @@
   <div class="container">
     <h1>Cartoon Search</h1>
 
-    <!-- Rendered Buttons will get Dumped Here  -->
+    <!-- Rendered buttons will get dumped here  -->
     <div id="buttons-view"></div>
 
     <form id="cartoon-form">
-      <label for="cartoon-input">Add a Cartoon</label>
+      <label for="cartoon-input">Add a cartoon</label>
       <input type="text" id="cartoon-input">
       <br>
 
       <!-- Button triggers new cartoon to be added -->
-      <input id="add-cartoon" type="submit" value="Add a Cartoon">
+      <input id="add-cartoon" type="submit" value="Submit">
     </form>
 
-    <!-- Cartoons will Get Dumped Here -->
+    <!-- Cartoons will get dumped here -->
     <div id="cartoons-view"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -43,9 +43,10 @@
       function displayCartoonInfo() {
 
         var cartoon = $(this).attr("data-name");
+
         var queryURL =
           "http://api.giphy.com/v1/gifs/search?q=" + cartoon + "&api_key=RpbF7yK9jdJvEIcxqxFvfqB36r3852SI&limit=10";
-
+ 
         // Creating an AJAX call for the specific cartoon button being clicked
         $.ajax({
           url: queryURL,
@@ -92,12 +93,12 @@
 
           // Appending the image
           cartoonDiv.append(image);
-         
+
           // Putting the entire cartoon above the previous cartoons
           $("#cartoons-view").prepend(cartoonDiv);
         });
 
-      }
+      }        
 
       // Function for displaying cartoon data
       function renderButtons() {
@@ -108,7 +109,7 @@
 
         // Looping through the array of cartoons
         for (var i = 0; i < cartoons.length; i++) {
-
+          
           // Then dynamicaly generating buttons for each cartoon in the array
           // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
           var a = $("<button>");
