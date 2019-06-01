@@ -38,7 +38,7 @@
     <script type="text/javascript">
 
       // Initial array of cartoons
-      var cartoons = ["Powerpuff Girls", "Rugrats", "Popeye", "Flintstones", "Kim Possible", "Doug", "Simpsons"];
+      var cartoons = ["Powerpuff Girls", "Mickey Mouse", "Rugrats", "Popeye", "Flintstones", "Kim Possible", "Doug", "Simpsons", "Scooby Doo", "Jetsons", "Donald Duck", "Looney Tunes", "Batman", "Duck Tales", "Sponge Bob", "Teenage Mutant Ninja Turtles", "Inspector Gadget", "Alvin and Chipmunks", "My Little Pony", "Smurfs"];
 
       // displayCartoonInfo function re-renders the HTML to display the appropriate content
       function displayCartoonInfo() {
@@ -54,8 +54,8 @@
           method: "GET"
         }).then(function (response) {
 
-          console.log(queryURL);
-          console.log(response);
+          // console.log(queryURL);
+          // console.log(response);
 
           var results = response.data;
 
@@ -73,7 +73,7 @@
           // Displaying the rating
           cartoonDiv.append(pOne);
 
-          // Storing the release year
+          // Storing the release years
           // var released = response.Released;
 
           // Creating an element to hold the release year
@@ -98,63 +98,16 @@
           // Creating an element to hold the image
           var image = $("<img>").attr("src", imgURL);
 
-          // Appending the image
-
-
-
-
-
-          // cartoonDiv.append(pOne);
-
-
-
-
-
-
-
-
-
-
-
           cartoonDiv.append(image);
 
           // Putting the entire cartoon above the previous cartoons
           $("#cartoons-view").prepend(cartoonDiv);
-   
-
-
-
-
-
-
 
           }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         });
 
       }
-
-
-
-
-
-
-
 
       // Function for displaying cartoon data
       function renderButtons() {

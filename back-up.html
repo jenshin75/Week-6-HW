@@ -36,6 +36,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
+
       // Initial array of cartoons
       var cartoons = ["Powerpuff Girls", "Rugrats", "Popeye", "Flintstones", "Kim Possible", "Doug", "Simpsons"];
 
@@ -45,22 +46,27 @@
         var cartoon = $(this).attr("data-name");
 
         var queryURL =
-          "http://api.giphy.com/v1/gifs/search?q=" + cartoon + "&api_key=RpbF7yK9jdJvEIcxqxFvfqB36r3852SI&limit=10";
- 
+        "http://api.giphy.com/v1/gifs/search?q=" + cartoon + "&api_key=RpbF7yK9jdJvEIcxqxFvfqB36r3852SI&limit=10";
+
         // Creating an AJAX call for the specific cartoon button being clicked
         $.ajax({
           url: queryURL,
           method: "GET"
         }).then(function (response) {
 
-          //  console.log(response.data[0].rating);
+          console.log(queryURL);
+          console.log(response);
+
+          var results = response.data;
+
+          for (var index = 0; index < results.length; index++) {
 
           // Creating a div to hold the cartoon
           var cartoonDiv = $("<div class='cartoon'>");
 
           // Storing the rating data
-          var rating = response.data[0].rating;
-
+          var rating = response.data[index].rating;
+          
           // Creating an element to have the rating displayed
           var pOne = $("<p>").text("Rating: " + rating);
 
@@ -86,19 +92,22 @@
           // cartoonDiv.append(pThree);
 
           // Retrieving the URL for the image
-          var imgURL = response.data[0].images.fixed_height_still.url;
+          var imgURL = response.data[index].images.fixed_height_still.url;
+
 
           // Creating an element to hold the image
           var image = $("<img>").attr("src", imgURL);
 
-          // Appending the image
           cartoonDiv.append(image);
 
           // Putting the entire cartoon above the previous cartoons
           $("#cartoons-view").prepend(cartoonDiv);
+
+          }
+
         });
 
-      }            
+      }
 
       // Function for displaying cartoon data
       function renderButtons() {
