@@ -38,7 +38,7 @@
     <script type="text/javascript">
 
       // Initial array of cartoons
-      var cartoons = ["Powerpuff Girls", "Mickey Mouse", "Rugrats", "Popeye", "Flintstones", "Kim Possible", "Doug", "Simpsons", "Scooby Doo", "Jetsons", "Donald Duck", "Looney Tunes", "Batman", "Duck Tales", "Sponge Bob", "Teenage Mutant Ninja Turtles", "Inspector Gadget", "Alvin and Chipmunks", "My Little Pony", "Smurfs"];
+      var cartoons = ["Powerpuff Girls", "Doug", "Simpsons", "Scooby Doo", "Jetsons", "Donald Duck", "Looney Tunes", "Batman", "Duck Tales", "Sponge Bob", "Teenage Mutant Ninja Turtles", "Inspector Gadget", "Alvin and Chipmunks", "My Little Pony", "Smurfs"];
 
       // displayCartoonInfo function re-renders the HTML to display the appropriate content
       function displayCartoonInfo() {
@@ -46,7 +46,7 @@
         var cartoon = $(this).attr("data-name");
 
         var queryURL =
-        "http://api.giphy.com/v1/gifs/search?q=" + cartoon + "&api_key=RpbF7yK9jdJvEIcxqxFvfqB36r3852SI&limit=10";
+          "http://api.giphy.com/v1/gifs/search?q=" + cartoon + "&api_key=RpbF7yK9jdJvEIcxqxFvfqB36r3852SI&limit=10";
 
         // Creating an AJAX call for the specific cartoon button being clicked
         $.ajax({
@@ -61,49 +61,61 @@
 
           for (var index = 0; index < results.length; index++) {
 
-          // Creating a div to hold the cartoon
-          var cartoonDiv = $("<div class='cartoon'>");
+            // Creating a div to hold the cartoon
+            var cartoonDiv = $("<div class='cartoon'>");
 
-          // Storing the rating data
-          var rating = response.data[index].rating;
-          
-          // Creating an element to have the rating displayed
-          var pOne = $("<p>").text("Rating: " + rating);
+            // Storing the rating data
+            var rating = response.data[index].rating;
 
-          // Displaying the rating
-          cartoonDiv.append(pOne);
+            // Creating an element to have the rating displayed
+            var pOne = $("<p>").text("Rating: " + rating);
 
-          // Storing the release years
-          // var released = response.Released;
+            // Displaying the rating
+            cartoonDiv.append(pOne);
 
-          // Creating an element to hold the release year
-          // var pTwo = $("<p>").text("Released: " + released);
+            // Storing the release years
+            // var released = response.Released;
 
-          // Displaying the release year
-          // cartoonDiv.append(pTwo);
+            // Creating an element to hold the release year
+            // var pTwo = $("<p>").text("Released: " + released);
 
-          // Storing the plot
-          // var plot = response.Plot;
+            // Displaying the release year
+            // cartoonDiv.append(pTwo);
 
-          // Creating an element to hold the plot
-          // var pThree = $("<p>").text("Plot: " + plot);
+            // Storing the plot
+            // var plot = response.Plot;
 
-          // Appending the plot
-          // cartoonDiv.append(pThree);
+            // Creating an element to hold the plot
+            // var pThree = $("<p>").text("Plot: " + plot);
 
-          // Retrieving the URL for the image
-          var imgURL = response.data[index].images.fixed_height_still.url;
+            // Appending the plot
+            // cartoonDiv.append(pThree);
+
+            // Retrieving the URL for the image
+            var imgURL = response.data[index].images.downsized_still.url;
+            var imgAnimate = response.data[index].images.downsized.url;
 
 
-          // Creating an element to hold the image
-          var image = $("<img>").attr("src", imgURL);
+            // Creating an element to hold the image
 
-          cartoonDiv.append(image);
+            var image = $("<img class='imgclick' src=" + imgURL + " srcalt =" + imgAnimate + ">");
+            console.log(image)
 
-          // Putting the entire cartoon above the previous cartoons
-          $("#cartoons-view").prepend(cartoonDiv);
+            cartoonDiv.append(image);
+
+            // Putting the entire cartoon above the previous cartoons
+            $("#cartoons-view").prepend(cartoonDiv);
 
           }
+
+          $(".imgclick").on("click", function () {
+            console.log(this)
+            var imgActive = $(this).attr("src")
+            var imgInactive = $(this).attr("srcalt")
+            $(this).attr("src", imgInactive )
+            $(this).attr("srcalt", imgActive )
+
+          })
 
         });
 
@@ -118,7 +130,7 @@
 
         // Looping through the array of cartoons
         for (var i = 0; i < cartoons.length; i++) {
-          
+
           // Then dynamicaly generating buttons for each cartoon in the array
           // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
           var a = $("<button>");
