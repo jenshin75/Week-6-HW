@@ -66,13 +66,13 @@
 
             // Storing the rating data
             var rating = response.data[index].rating;
-
+         
             // Creating an element to have the rating displayed
             var pOne = $("<p>").text("Rating: " + rating);
 
-            // Displaying the rating
+            //Displaying the rating
             cartoonDiv.append(pOne);
-
+      
             // Storing the release years
             // var released = response.Released;
 
@@ -95,13 +95,12 @@
             var imgURL = response.data[index].images.downsized_still.url;
             var imgAnimate = response.data[index].images.downsized.url;
 
-
             // Creating an element to hold the image
 
             var image = $("<img class='imgclick' src=" + imgURL + " srcalt =" + imgAnimate + ">");
             console.log(image)
 
-            cartoonDiv.append(image);
+            cartoonDiv.prepend(image);
 
             // Putting the entire cartoon above the previous cartoons
             $("#cartoons-view").prepend(cartoonDiv);
